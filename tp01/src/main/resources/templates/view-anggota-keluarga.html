@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Sistem Kependudukan DKI Jakarta</title>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">WebSiteName</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Page 1</a></li>
+            <li><a href="#">Page 2</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <strong><h3 th:text="'Lihat Data Keluarga - ' + ${keluarga.nomor_kk}">NKK</h3></strong>
+    <div id="KeluargaDescription">
+        <table>
+            <tr>
+                <td><strong>Alamat</strong></td>
+                <td th:text="${keluarga.alamat}">Alamat</td>
+            </tr>
+            <tr>
+                <td><strong>RT/RW</strong></td>
+                <td th:text="${keluarga.rt_rw}">RT/RW</td>
+            </tr>
+            <tr>
+                <td><strong>Kelurahan/Desa</strong></td>
+                <td th:text="${keluarga.kelurahan.nama_kelurahan}">Kelurahan/Desa</td>
+            </tr>
+            <tr>
+                <td><strong>Kecamatan</strong></td>
+                <td th:text="${keluarga.kelurahan.kecamatan.nama_kecamatan}">Kecamatan</td>
+            </tr>
+            <tr>
+                <td><strong>Kota</strong></td>
+                <td th:text="${keluarga.kelurahan.kecamatan.kota.nama_kota}">Kota</td>
+            </tr>
+        </table>
+    </div>
+    <hr/>
+    <div id="AnggotaKeluarga">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><strong>No.</strong></th>
+                    <th><strong>Nama Lengkap</strong></th>
+                    <th><strong>NIK</strong></th>
+                    <th><strong>Jenis Kelamin</strong></th>
+                    <th><strong>Tempat Lahir</strong></th>
+                    <th><strong>Tanggal Lahir</strong></th>
+                    <th><strong>Agama</strong></th>
+                    <th><strong>Pekerjaan</strong></th>
+                    <th><strong>Status Perkawinan</strong></th>
+                    <th><strong>Status dalam Keluarga</strong></th>
+                    <th><strong>Kewargenegaraan</strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="penduduk,iterationStatus: ${keluarga.anggota_keluarga}">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${penduduk.nama}"></td>
+                    <td th:text="${penduduk.nik}"></td>
+                    <label th:switch="${penduduk.jenis_kelamin}">
+                        <label th:case="1"><td th:text="Laki-laki"></td></label>
+                        <label th:case="0"><td th:text="Perempuan"></td></label>
+                    </label>
+                    <td th:text="${penduduk.tempat_lahir}"></td>
+                    <td th:text="${penduduk.tanggal_lahir}"></td>
+                    <td th:text="${penduduk.agama}"></td>
+                    <td th:text="${penduduk.pekerjaan}"></td>
+                    <td th:text="${penduduk.status_perkawinan}"></td>
+                    <td th:text="${penduduk.status_dalam_keluarga}"></td>
+                    <label th:switch="${penduduk.is_wni}">
+                        <label th:case="1"><td th:text="WNI"></td></label>
+                        <label th:case="0"><td th:text="WNA"></td></label>
+                    </label>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>

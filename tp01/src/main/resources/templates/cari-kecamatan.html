@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Sistem Kependudukan DKI Jakarta</title>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">WebSiteName</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Page 1</a></li>
+            <li><a href="#">Page 2</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div>
+        <h4>Lihat Data Penduduk Berdasarkan Kota</h4>
+    </div>
+    <hr/>
+
+    <!-- Form kota -->
+    <div>
+
+    </div>
+    <form class="form-horizontal" action="/penduduk/cari" method="get">
+        <div class="form-group" >
+            <label for="kota">Kota: </label>
+            <select class="form-control" id="kota" disabled = "disable">
+                <option name="nama_kota" id="kota" th:text="${nama_kota}"></option>
+            </select>
+        </div>
+    </form>
+    <form class="form-horizontal" action="/penduduk/cari" method="get">
+        <div class="form-group" >
+            <label for="kecamatan">Kecamatan: </label>
+            <select name="id_kecamatan" class="form-control" id="kecamatan" >
+                <div th:each="kecamatan:${kecamatan_kecamatan}">
+                    <option th:value="${kecamatan.id}" th:text="${kecamatan.nama_kecamatan}">Nama kecamatan</option>
+                </div>
+            </select>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input type="hidden" th:value="${id_kota}" name="id_kota"/>
+                    <button type="submit" class="btn btn-primary">Lihat</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <hr/>
+
+</div>
+</body>
+
+</html>
